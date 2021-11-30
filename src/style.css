@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.card > .brand-icon {
+    @apply opacity-0;
+}
+.card:hover > .brand-icon {
+    @apply opacity-100 text-purple-600;
+}
+
+@media (max-width: 992px){
+    #sidebar{
+        @apply -left-full;
+    }
+    #sidebar.active{
+        @apply left-0 top-0;
+    }
+}
+@screen sm {
+    .container {
+        @apply max-w-full;
+    },
+    br {
+        @apply hidden;
+    },
+    .card > .brand-icon {
+        @apply opacity-100 text-purple-600;
+    }    
+
+}
+/* //91.666667%;
+83.333333%
+*/
+@screen md {
+    .container {
+        max-width: 91.666667%; 
+    }
+}
+@screen lg {
+    .container {
+        max-width:  91.666667%;
+    } 
+}
+@screen xl {
+    .container {
+        max-width: 91.666667%;
+    }
+}
+@screen 2xl {
+    .container {
+        max-width: 70%;
+    }
+}
+@screen 3xl {
+    .container {
+        max-width: 70%;
+    }
+}

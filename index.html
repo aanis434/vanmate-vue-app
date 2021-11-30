@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vanmate</title>
+
+    <link rel="stylesheet" href="./dist/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="./dist/splidejs/css/splide.min.css">
+    <style>
+        .splide__slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .splide__arrow {
+            border-radius: none;
+            border-radius: 6px;
+            background-color: #E5E5E5;
+            opacity: 1;
+            /* color: #9A9EA7; */
+        }
+
+        .splide__arrow--next {
+            top: -65px;
+            right: 0;
+        }
+
+        .splide__arrow--prev {
+            top: -65px;
+            left: 94%;
+        }
+
+
+        .search-filter {
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* floating select level  */
+        .floating-label {
+            position: relative;
+            width: 100%;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+
+        .floating-select {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 4px 4px;
+            display: block;
+            width: 100%;
+            height: 30px;
+            background-color: transparent;
+            border: none;
+        }
+
+        .floating-select:focus {
+            outline: none;
+        }
+
+        .float-label {
+            color: #999;
+            font-size: 12px;
+            text-transform: capitalize;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            left: 5px;
+            top: 5px;
+            transition: 0.2s ease all;
+            -moz-transition: 0.2s ease all;
+            -webkit-transition: 0.2s ease all;
+        }
+
+        .floating-select:focus~label,
+        .floating-select:not([value=""]):valid~label {
+            top: -15px;
+            font-size: 14px;
+        }
+
+        /* active state */
+        .floating-select:focus~.floating-select:focus~ {
+            width: 50%;
+        }
+
+        /* active state */
+        .floating-select:focus~ {
+            -webkit-animation: inputHighlighter 0.3s ease;
+            -moz-animation: inputHighlighter 0.3s ease;
+            animation: inputHighlighter 0.3s ease;
+        }
+
+        @media (max-width: 1920px) {
+            .splide__arrow--prev {
+                top: -65px;
+                left: 95%;
+            }
+        }
+
+        @media (max-width: 1536px) {
+            .splide__arrow--prev {
+                top: -65px;
+                left: 94%;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .splide__arrow--prev {
+                top: -65px;
+                left: 92%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .splide__arrow--prev {
+                top: -65px;
+                left: 90%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .splide__arrow--prev {
+                top: -65px;
+                left: 82%;
+            }
+
+            .floating-select:focus~label,
+            .floating-select:not([value=""]):valid~label {
+                top: -15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="relative">
+        <div class="min-h-[60vh] 2xl:min-h-[60vh] md:min-h-[72vh] bg-auto 2xl:bg-cover bg-no-repeat bg-opacity-95 bg-hero-bg-color opacity-100"
+            style="background-image: url('./assets/images/hero-bg.png');">
+            <!-- navbar start  -->
+            <nav>
+                <div class="px-4 md:px-20 flex items-center justify-between">
+                    <!-- logo start  -->
+                    <div class="pr-8 py-6 flex flex-items-center cursor-pointer ">
+                        <img src="./assets/images/logo.png" alt="vanmate">
+                        <span
+                            class="hidden md:block lowercase font-poppins font-semibold ml-2 text-4xl text-white">vanmate</span>
+                    </div>
+                    <!-- logo end  -->
+                    <!-- hambarg menu for table and mobile start -->
+                    <div id="hambarg" class="cursor-pointer pl v-8 py-6 text-white lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </div>
+                    <!-- hamberg menu for table and mobile end -->
+                    <!-- navbar link start  -->
+                    <div class="hidden lg:flex items-center justify-between flex-grow xl:pl-6 2xl:pl-12 text-white">
+                        <!-- menu link start -->
+                        <div
+                            class="flex items-center xl:space-x-6 2xl:space-x-7 capitalize font-inter font-semibold text-base">
+                            <a href="#" class="hover:text-gray-300 transition cursor-pointer">our vans</a>
+                            <a href="#" class="hover:text-gray-300 transition cursor-pointer">how it works</a>
+                            <a href="#" class="hover:text-gray-300 transition cursor-pointer">Electric vans</a>
+                            <a href="#" class="hover:text-gray-300 transition cursor-pointer">finance</a>
+                            <a href="#" class="hover:text-gray-300 transition cursor-pointer">fleet</a>
+                            <a href="#" class="hover:text-gray-300 transition cursor-pointer">contact</a>
+                        </div>
+                        <!-- menu link end -->
+                        <!-- button link start  -->
+                        <div class="flex items-center xl:space-x-6 2xl:space-x-12 font-poppins capitalize">
+                            <!-- contact button start -->
+                            <a href="#"
+                                class="text-white hover:text-gray-200 transition cursor-pointer text-sm font-semibold flex items-center">
+                                <div class="bg-white p-1 rounded-md mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-gray-400"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                sign up
+                            </a>
+                            <!-- contact button end -->
+                            <!-- search input  -->
+                            <div
+                                class="w-32 flex items-center bg-secondary xl:px-3 2xl:px-5 py-2 rounded-lg font-semibold text-base font-poppins m-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <input type="text"
+                                    class="w-16 pl-2 text-white bg-secondary border-none rounded-3xl focus:outline-none placeholder-white"
+                                    placeholder="Search">
+                            </div>
+                            <!-- ./ search input  -->
+                        </div>
+                        <!-- button link end  -->
+                    </div>
+                    <!-- navbar link end  -->
+                </div>
+            </nav>
+            <!-- navbar end  -->
+            <!-- hero section start  -->
+            <div
+                class="container text-center flex flex-col justify-start items-center h-[inherit] pt-12 md:pt-14 lg:pt-20 text-white font-inter font-bold hero">
+                <h1 class="text-3xl lg:text-6xl">Say hello to your next <br>
+                    awesome vehicle</h1>
+                <p class="text-base lg:text-xl mt-5">Featuring Used, Wholesale and Salvage Cars, Trucks & <br> SUVs
+                    for Sale</p>
+            </div>
+            <!-- hero section start  -->
+        </div>
+        <!-- filter search form start  -->
+
+        <div
+            class="search-filter w-8/12 absolute container bg-white rounded-md p-3 shadow-lg text-black md:grid grid-cols-2  md:grid-cols-3 gap-y-4 lg:grid-cols-6 items-center lg:divide-x divide-gray-100">
+            <!-- item start  -->
+            <div class="flex flex-col justify-items-center items-start space-y-1 px-4">
+                <div class="floating-label">
+                    <select class="floating-select w-full" onclick="this.setAttribute('value', this.value);" value="">
+                        <option value="" style='display:none'></option>
+                        <option value="1">Small Van</option>
+                        <option value="2">Item2</option>
+                        <option value="3">Item3</option>
+                        <option value="4">Item4</option>
+                        <option value="5">Item5</option>
+                    </select>
+                    <label class="float-label">Type</label>
+                </div>
+            </div>
+            <!-- item end  -->
+            <!-- item start  -->
+            <div class="flex flex-col justify-items-center items-start space-y-1 px-4">
+                <div class="floating-label">
+                    <select class="floating-select w-full" onclick="this.setAttribute('value', this.value);" value="">
+                        <option value="" style='display:none'></option>
+                        <option value="1">Ford</option>
+                        <option value="2">Item2</option>
+                        <option value="3">Item3</option>
+                        <option value="4">Item4</option>
+                        <option value="5">Item5</option>
+                    </select>
+                    <label class="float-label">Make</label>
+                </div>
+            </div>
+            <!-- item end  -->
+            <!-- item start  -->
+            <div class="flex flex-col justify-items-center items-start space-y-1 px-4">
+                <div class="floating-label">
+                    <select class="floating-select w-full" onclick="this.setAttribute('value', this.value);" value="">
+                        <option value="" style='display:none'></option>
+                        <option value="1">Ford</option>
+                        <option value="2">Item2</option>
+                        <option value="3">Item3</option>
+                        <option value="4">Item4</option>
+                        <option value="5">Item5</option>
+                    </select>
+                    <label class="float-label">Model</label>
+                </div>
+            </div>
+            <!-- item end  -->
+            <!-- item start  -->
+            <div class="flex flex-col justify-items-center items-start space-y-1 px-4">
+                <div class="floating-label">
+                    <select class="floating-select w-full" onclick="this.setAttribute('value', this.value);" value="">
+                        <option value="" style='display:none'></option>
+                        <option value="1">$234</option>
+                        <option value="2">$2342</option>
+                        <option value="3">$2343</option>
+                        <option value="4">$2344</option>
+                        <option value="5">$2345</option>
+                    </select>
+                    <label class="float-label">Min Price</label>
+                </div>
+            </div>
+            <!-- item end  -->
+            <!-- item start  -->
+            <div class="flex flex-col justify-items-center items-start space-y-1 px-4">
+                <div class="floating-label">
+                    <select class="floating-select w-full" onclick="this.setAttribute('value', this.value);" value="">
+                        <option value="" style='display:none'></option>
+                        <option value="1">$234</option>
+                        <option value="2">$234</option>
+                        <option value="3">$2343</option>
+                        <option value="4">$2344</option>
+                        <option value="5">$2345</option>
+                    </select>
+                    <label class="float-label">Max price</label>
+                </div>
+            </div>
+            <!-- item end  -->
+            <!-- item start  -->
+            <div class="flex flex-col justify-items-center items-start space-y-1 px-4">
+                <div
+                    class="w-32 flex items-center bg-primary text-white px-2 xl:px-3 2xl:px-5 py-2 rounded-lg font-semibold text-sm lg:text-base font-poppins">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text"
+                        class="w-16 pl-2 bg-primary border-none rounded-3xl focus:outline-none placeholder-white"
+                        placeholder="Search">
+                </div>
+            </div>
+            <!-- item end  -->
+        </div>
+        <!-- filter search form end  -->
+    </header>
+    <!-- header end  -->
+
+    <!-- Mobile menu  -->
+    <!-- sidebar  -->
+    <div id="sidebar"
+        class="fixed -left-full w-full md:w-72 h-full bg-white shadow-md z-10 flex flex-col transition-all">
+        <!-- brand name  -->
+        <div class="mt-4 text-black font-bold text-2xl lowercase py-5 relative mx-5">
+            vanmate
+            <svg id="sidebar-close" xmlns="http://www.w3.org/2000/svg"
+                class="absolute block h-6 w-6 top-5 right-2 lg:hidden" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </div>
+        <!-- sidebar items  -->
+        <div class="flex flex-col justify-between flex-grow">
+            <div class="py-5 text-black capitalize font-bold text-base">
+                <a href="#" class="flex items-center justify-center my-1 px-4 py-3 ">
+                    Our Vans
+                </a>
+                <a href="#" class="flex items-center justify-center my-1 px-4 py-3 ">
+                    how it works
+                </a>
+                <a href="#" class="flex items-center justify-center my-1 px-4 py-3 ">
+                    Electric vans
+                </a>
+                <a href="#" class="flex items-center justify-center my-1 px-4 py-3 ">
+                    finance
+                </a>
+                <a href="#" class="flex items-center justify-center my-1 px-4 py-3 ">
+                    fleet
+                </a>
+                <a href="#" class="flex items-center justify-center my-1 px-4 py-3 ">
+                    contact
+                </a>
+            </div>
+        </div>
+        <!-- mobile sidebar extended  -->
+        <div class="lg:hidden block">
+            <div class="relative mx-5 mb-5">
+                <!-- button link start  -->
+                <div class="flex items-center justify-around xl:space-x-6 2xl:space-x-12 font-poppins capitalize">
+                    <!-- contact button start -->
+                    <a href="#"
+                        class="text-black hover:text-gray-200 transition cursor-pointer text-sm font-semibold flex items-center">
+                        <div class="bg-black p-1 rounded-md mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        sign up
+                    </a>
+                    <!-- contact button end -->
+                    <!-- search input  -->
+                    <div
+                        class="w-32 flex items-center bg-black text-white px-3 xl:px-3 2xl:px-5 py-2 rounded-lg font-semibold text-base font-poppins">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text"
+                            class="w-16 pl-2 text-white bg-black border-none rounded-3xl focus:outline-none placeholder-white"
+                            placeholder="Search">
+                    </div>
+                    <!-- ./ search input  -->
+                </div>
+                <!-- button link end  -->
+            </div>
+        </div>
+    </div>
+    <!-- end sidebar  -->
+    <!-- Mobile menu end -->
+
+    <!-- feature section start  -->
+    <section>
+        <div
+            class="container grid grid-cols-6 items-center justify-items-center mt-48 md:mt-0 pb-12 md:py-24 px-14 gap-x-4 ">
+            <a href="#">
+                <img src="./assets/images/vechicle-1.png" alt="">
+            </a>
+            <a href="#">
+                <img src="./assets/images/vechicle-2.png" alt="">
+            </a>
+            <a href="#">
+                <img src="./assets/images/vechicle-3.png" alt="">
+            </a>
+            <a href="#">
+                <img src="./assets/images/vechicle-4.png" alt="">
+            </a>
+            <a href="#">
+                <img src="./assets/images/vechicle-5.png" alt="">
+            </a>
+            <a href="#">
+                <img src="./assets/images/vechicle-6.png" alt="">
+            </a>
+        </div>
+    </section>
+    <!-- feature section end  -->
+
+    <!-- find van by model section start  -->
+    <section>
+        <div class="container font-inter mb-12 relative">
+            <!-- content heading start  -->
+            <div class="flex items-center justify-between pb-12">
+                <h2 class="text-2xl lg:text-3xl font-bold">Find Van by Model</h2>
+                <div class="flex items-center justify-around">
+                    <!-- <span class="text-base font-bold text-gray-400">1/6</span> -->
+                    <!-- left arrow  -->
+                    <!-- <div class="splide__arrows">
+                        <div class="bg-gray-100 rounded-md p-1 ml-3 text-gray-400 cursor-pointer splide__arrow splide__arrow--prev"
+                            type="button" aria-controls="card-slider-track" aria-label="Previous slide">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                            </svg>
+                        </div> -->
+                    <!-- right arrow  -->
+                    <!--  <div class="bg-gray-100 rounded-md p-1 ml-3 text-gray-400 cursor-pointer">
+                            <button class="splide__arrow splide__arrow--next" type="button"
+                                aria-controls="card-slider-track" aria-label="Next slide">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- content heading end  -->
+            <!-- content start  -->
+            <div id="card-slider" class="splide">
+                <!-- left arrow  -->
+                <div class="splide__arrows">
+                    <div class="cursor-pointer">
+                        <button class="splide__arrow splide__arrow--prev" type="button"
+                            aria-controls="card-slider-track" aria-label="Previous slide">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- right arrow  -->
+                    <div class="cursor-pointer">
+                        <button class="splide__arrow splide__arrow--next" type="button"
+                            aria-controls="card-slider-track" aria-label="Next slide">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="splide__track py-8">
+                    <div class="splide__list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4">
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-5 flex flex-col items-center justify-around shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-1.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">Small Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">23,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-5 flex flex-col items-center justify-around shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-2.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">medium Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">17,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-5 flex flex-col items-center justify-around shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-3.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">large Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">19,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                        <!-- card item start  -->
+                        <div
+                            class="splide__slide px-5 pt-11 pb-6 flex flex-col items-center justify-between shadow-lg rounded-md">
+                            <img class="w-full max-h-40 object-contain" src="./assets/images/van-4.png" alt="">
+                            <div class="flex flex-col items-center justify-items-end space-y-2">
+                                <h4 class="text-base font-semibold capitalize">crew Vans</h4>
+                                <a href="#"
+                                    class="text-xs font-bold text-gray-500 bg-gray-200 px-4 py-3 rounded-md hover:text-blue-500 hover:bg-blue-200">12,457
+                                    vechicles</a>
+                            </div>
+                        </div>
+                        <!-- card item end  -->
+                    </div>
+                </div>
+            </div>
+            <!-- content end  -->
+        </div>
+    </section>
+    <!-- find van by model section end  -->
+
+    <!-- Explore the best selling makes section start  -->
+    <section class="
+    
+    bg-no-repeat bg-right bg-contain bg-opacity-50" style="background-image: url('./assets/images/explore-bg.png');">
+        <div class="container font-inter py-6 md:py-12">
+            <!-- content heading start  -->
+            <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-3 gap-x-40 pb-9">
+                <h2 class="text-3xl font-bold">Explore the best <br> selling makes</h2>
+                <div class="col-span-2">
+                    <p class="text-base text-gray-400 leading-5">Along with conventional advertising and below the line
+                        activities, organizations and <br> corporate bodies have come to realize that they need to
+                        invest in trade shows in order <br> to create maximum recall for their product or brand name.
+                    </p>
+                </div>
+            </div>
+            <!-- content heading end  -->
+            <!-- content start  -->
+            <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-2 gap-x-7 gap-y-5">
+                <!-- card item start  -->
+                <div class="px-4 py-7 flex items-center justify-between shadow-lg rounded-md space-x-32 card bg-white">
+                    <div class="flex justify-between space-x-4">
+                        <img class="block" src="./assets/images/b_icon-1.png" alt="">
+                        <div class="flex flex-col items-start justify-center">
+                            <h4 class="text-base font-semibold capitalize">Subaru</h4>
+                            <p class="text-xs text-gray-500">from $65k</p>
+                        </div>
+                    </div>
+                    <div class="brand-icon transition-all duration-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- card item end  -->
+                <!-- card item start  -->
+                <div class="px-4 py-7 flex items-center justify-between shadow-lg rounded-md space-x-32 card bg-white">
+                    <div class="flex justify-between space-x-4">
+                        <img class="block" src="./assets/images/b_icon-2.png" alt="">
+                        <div class="flex flex-col items-start justify-center">
+                            <h4 class="text-base font-semibold capitalize">Volkswagen</h4>
+                            <p class="text-xs text-gray-500">from $65k</p>
+                        </div>
+                    </div>
+                    <div class="brand-icon transition-all duration-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- card item end  -->
+                <!-- card item start  -->
+                <div class="px-4 py-7 flex items-center justify-between shadow-lg rounded-md space-x-32 card bg-white">
+                    <div class="flex justify-between space-x-4">
+                        <img class="block" src="./assets/images/b_icon-3.png" alt="">
+                        <div class="flex flex-col items-start justify-center">
+                            <h4 class="text-base font-semibold capitalize">Toyota</h4>
+                            <p class="text-xs text-gray-500">from $65k</p>
+                        </div>
+                    </div>
+                    <div class="brand-icon transition-all duration-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- card item end  -->
+                <!-- card item start  -->
+                <div class="px-4 py-7 flex items-center justify-between shadow-lg rounded-md space-x-32 card bg-white">
+                    <div class="flex items-start justify-start space-x-4">
+                        <img class="block" src="./assets/images/b_icon-4.png" alt="">
+                        <div class="flex flex-col items-start justify-center">
+                            <h4 class="text-base font-semibold capitalize">Mercedes-Benz</h4>
+                            <p class="text-xs text-gray-500">from $65k</p>
+                        </div>
+                    </div>
+                    <div class="brand-icon transition-all duration-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- card item end  -->
+                <!-- card item start  -->
+                <div
+                    class="px-4 py-7 flex items-center justify-between shadow-lg rounded-md space-x-32 cursor-pointer card bg-white">
+                    <div class="flex justify-between space-x-4">
+                        <img class="block" src="./assets/images/b_icon-5.png" alt="">
+                        <div class="flex flex-col items-start justify-center">
+                            <h4 class="text-base font-semibold capitalize">Hyundai</h4>
+                            <p class="text-xs text-gray-500">from $65k</p>
+                        </div>
+                    </div>
+                    <div class="brand-icon transition-all duration-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- card item end  -->
+                <!-- card item start  -->
+                <div class="px-4 py-7 flex items-center justify-between shadow-lg rounded-md space-x-32 card bg-white">
+                    <div class="flex justify-between space-x-4">
+                        <img class="block" src="./assets/images/b_icon-6.png" alt="">
+                        <div class="flex flex-col items-start justify-center">
+                            <h4 class="text-base font-semibold capitalize">Infiniti</h4>
+                            <p class="text-xs text-gray-500">from $65k</p>
+                        </div>
+                    </div>
+                    <div class="brand-icon transition-all duration-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+            </div>
+            <!-- content end  -->
+        </div>
+    </section>
+    <!-- Explore the best selling makes section end  -->
+
+    <!-- Banner section start  -->
+    <section class="mt-16 mb-10">
+        <div class="container font-inter text-white">
+            <div class="my-auto">
+                <div class="h-72 3xl:h-96 bg-no-repeat bg-cover bg-left lg:bg-bottom rounded-md px-6 py-9 flex items-start flex-col justify-center"
+                    style="background-image: url('./assets/images/banner-1.png');">
+                    <h2 class="font-bold text-2xl">We updated our cancelation <br>
+                        policy to ensure the user experience </h2>
+                    <p class="text-sm pt-1 pb-5 text-gray-200">Learn more details on our latest blog post</p>
+                    <button
+                        class="font-poppins font-semibold text-sm cursor-pointer bg-black rounded-md px-7 py-4 transition hover:text-gray-300">Explore
+                        updates</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner section end  -->
+
+    <!-- popular vehicles start -->
+    <section class="my-20">
+        <div class="container font-inter">
+            <!-- content heading start  -->
+            <div class="flex items-center justify-between pb-12">
+                <h2 class="text-2xl lg:text-3xl font-bold">Popular Vehicles</h2>
+                <div class="flex items-center justify-around">
+                    <span class="text-base font-bold text-gray-400">1/6</span>
+                    <!-- left arrow  -->
+                    <div class="bg-gray-100 rounded-md p-1 ml-3 text-gray-400 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                        </svg>
+                    </div>
+                    <!-- right arrow  -->
+                    <div class="bg-gray-100 rounded-md p-1 ml-3 text-gray-400 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <!-- content heading end  -->
+            <!-- content start  -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7">
+                <!-- card item start  -->
+                <div class="flex flex-col space-y-3 rounded-lg border border-gray-200">
+                    <div
+                        class="bg-primary flex justify-between items-center pt-4 pb-2 px-6 rounded-tl-md rounded-tr-md">
+                        <h4 class="text-base font-semibold text-white capitalize">In Stock Deal</h4>
+                        <h4 class="text-base font-semibold text-white capitalize">2 - 3 Week Delivery</h4>
+                    </div>
+                    <div class="mx-auto">
+                        <img src="./assets/images/popular_vehicles-1.png" alt="">
+                    </div>
+                    <div class="px-6">
+                        <h2 class="font-semibold text-lg capitalize tracking-wide">Ford Transit Custom limited L1H1</h2>
+                        <h6 class="text-base capitalize text-gray-400 letter tracking-tighter">2.0 EcoBlue 130ps Low
+                            Roof Limited Van</h6>
+                    </div>
+                    <div class="flex items-start justify-center divide-x divide-gray-100">
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/transmission.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">transmission</h5>
+                            <h5 class="capitalize text-xs text-gray-500">manual</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/fuel.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">fuel type</h5>
+                            <h5 class="capitalize text-xs text-gray-500">Diesel</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/emissions.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">Emissions</h5>
+                            <h5 class="capitalize text-xs text-gray-500">125/km</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/economy.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">economy</h5>
+                            <h5 class="capitalize text-xs text-gray-500">56.5MPG </h5>
+                        </div>
+                        <!-- item end  -->
+                    </div>
+                    <div class="px-6 flex justify-between items-center py-6">
+                        <div>
+                            <h5 class="font-bold text-black text-2xl">£205.95</h5>
+                            <div class="flex items-center justify-evenly text-gray-400">
+                                <p class=" text-xs capitalize">Per Month Ex. VAT</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <a href="#"
+                            class="capitalize font-semibold text-base text-white px-5 py-3 bg-primary rounded-lg">view
+                            offer</a>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+                <!-- card item start  -->
+                <div class="flex flex-col space-y-3 rounded-lg border border-gray-200">
+                    <div
+                        class="bg-secondary flex justify-between items-center pt-4 pb-2 px-6 rounded-tl-md rounded-tr-md">
+                        <h4 class="text-base font-semibold text-white capitalize">Hot Deals</h4>
+                        <h4 class="text-base font-semibold text-white capitalize">2 - 3 Week Delivery</h4>
+                    </div>
+                    <div class="mx-auto">
+                        <img src="./assets/images/popular_vehicles-2.png" alt="">
+                    </div>
+                    <div class="px-6">
+                        <h2 class="font-semibold text-lg capitalize tracking-wide">Ford Transit Custom limited L1H1</h2>
+                        <h6 class="text-base capitalize text-gray-400 letter tracking-tighter">2.0 EcoBlue 130ps Low
+                            Roof Limited Van</h6>
+                    </div>
+                    <div class="flex items-start justify-center divide-x divide-gray-100">
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/transmission.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">transmission</h5>
+                            <h5 class="capitalize text-xs text-gray-500">manual</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/fuel.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">fuel type</h5>
+                            <h5 class="capitalize text-xs text-gray-500">Diesel</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/emissions.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">Emissions</h5>
+                            <h5 class="capitalize text-xs text-gray-500">125/km</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/economy.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">economy</h5>
+                            <h5 class="capitalize text-xs text-gray-500">56.5MPG </h5>
+                        </div>
+                        <!-- item end  -->
+                    </div>
+                    <div class="px-6 flex justify-between items-center py-6">
+                        <div>
+                            <h5 class="font-bold text-black text-2xl">£205.95</h5>
+                            <div class="flex items-center justify-evenly text-gray-400">
+                                <p class=" text-xs capitalize">Per Month Ex. VAT</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <a href="#"
+                            class="capitalize font-semibold text-base text-white px-5 py-3 bg-secondary rounded-lg">view
+                            offer</a>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+                <!-- card item start  -->
+                <div class="flex flex-col space-y-3 rounded-lg border border-gray-200">
+                    <div
+                        class="bg-ternary flex justify-between items-center pt-4 pb-2 px-6 rounded-tl-md rounded-tr-md">
+                        <h4 class="text-base font-semibold text-white capitalize">Electric Vechicles</h4>
+                        <h4 class="text-base font-semibold text-white capitalize">2 - 3 Week Delivery</h4>
+                    </div>
+                    <div class="mx-auto">
+                        <img src="./assets/images/popular_vehicles-3.png" alt="">
+                    </div>
+                    <div class="px-6">
+                        <h2 class="font-semibold text-lg capitalize tracking-wide">Ford Transit Custom limited L1H1</h2>
+                        <h6 class="text-base capitalize text-gray-400 letter tracking-tighter">2.0 EcoBlue 130ps Low
+                            Roof Limited Van</h6>
+                    </div>
+                    <div class="flex items-start justify-center divide-x divide-gray-100">
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/transmission.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">transmission</h5>
+                            <h5 class="capitalize text-xs text-gray-500">manual</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/fuel.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">fuel type</h5>
+                            <h5 class="capitalize text-xs text-gray-500">Diesel</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/emissions.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">Emissions</h5>
+                            <h5 class="capitalize text-xs text-gray-500">125/km</h5>
+                        </div>
+                        <!-- item end  -->
+                        <!-- item start  -->
+                        <div class="flex flex-col justify-items-center items-center space-y-1 px-4">
+                            <div>
+                                <img src="./assets/images/economy.png" class="opacity-50" alt="">
+                            </div>
+                            <h5 class="capitalize font-semibold text-xs text-gray-500">economy</h5>
+                            <h5 class="capitalize text-xs text-gray-500">56.5MPG </h5>
+                        </div>
+                        <!-- item end  -->
+                    </div>
+                    <div class="px-6 flex justify-between items-center py-6">
+                        <div>
+                            <h5 class="font-bold text-black text-2xl">£205.95</h5>
+                            <div class="flex items-center justify-evenly text-gray-400">
+                                <p class=" text-xs capitalize">Per Month Ex. VAT</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <a href="#"
+                            class="capitalize font-semibold text-base text-white px-5 py-3 bg-ternary rounded-lg">view
+                            offer</a>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+            </div>
+            <!-- content end  -->
+        </div>
+    </section>
+    <!-- popular vehicles end -->
+
+    <!-- auction section start  -->
+    <section class="my-5">
+        <div class="container grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-8 items-center justify-between">
+            <div>
+                <h3 class="font-bold text-2xl lg:text-3xl capitalize">Ford Transit 350 Leader</h3>
+                <h6 class="text-base text-gray-400 capitalize tracking-tight">2.0 EcoBlue 130ps Low Roof Limited Van
+                </h6>
+                <div class="capitalize text-4xl font-bold flex items-center space-x-2 py-6">
+                    <span class="px-3.5 py-1.5 border-gray-100 rounded-lg border">£</span>
+                    <span class="px-3.5 py-1.5 border-gray-100 rounded-lg border">2</span>
+                    <span class="px-3.5 py-1.5 border-gray-100 rounded-lg border">8</span>
+                    <span class="px-3.5 py-1.5 border-gray-100 rounded-lg border">9</span>
+                    <span class="text-base self-end pb-2">per Month</span>
+                </div>
+                <p class="text-base text-gray-400 tracking-tight">Along with conventional advertising and below the line
+                    activities,
+                    <br> organizations and corporate bodies have come to realize that <br> they need to invest in trade
+                    shows in order to create maximum <br> recall for their product or brand name.
+                </p>
+                <a href="#"
+                    class="mt-7 inline-block rounded-lg  font-poppins font-semibold text-sm text-gray-400 px-5 py-3 bg-gray-100 border">
+
+                    <img src="./assets/images/hammer.png" alt="" class="inline mr-1">
+                    Explore
+                    All
+                    Auctions</a>
+            </div>
+            <div class="ml-auto">
+                <img src="./assets/images/350_leader_grp.png" alt="">
+            </div>
+        </div>
+    </section>
+    <!-- auction section end  -->
+
+    <!-- Banner with right content section start  -->
+    <section class="mt-16 mb-10">
+        <div class="container font-inter text-white">
+            <div class="h-72 3xl:h-96 bg-no-repeat bg-cover bg-right lg:bg-bottom rounded-md px-6 py-9 flex flex-col items-end justify-center text-right"
+                style="background-image: url('./assets/images/banner-2.png');">
+                <h2 class="font-bold text-xl lg:text-2xl">We updated our cancelation <br>
+                    policy to ensure the user experience </h2>
+                <p class="text-sm pt-1 pb-5 text-gray-200">Learn more details on our latest blog post</p>
+                <button
+                    class="font-poppins font-semibold text-sm cursor-pointer bg-black rounded-md px-7 py-4 transition hover:text-gray-300">Explore
+                    updates</button>
+            </div>
+        </div>
+    </section>
+    <!-- Banner with right content  section end  -->
+
+    <!-- latest news start -->
+    <section class="my-20">
+        <div class="container font-inter">
+            <!-- content heading start  -->
+            <div class="flex items-center justify-between pb-12">
+                <h2 class="text-2xl lg:text-3xl font-bold">Latest news</h2>
+                <div class="flex items-center justify-around">
+                    <span class="text-base font-bold text-gray-400">1/6</span>
+                    <!-- left arrow  -->
+                    <div class="bg-gray-100 rounded-md p-1 ml-3 text-gray-400 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                        </svg>
+                    </div>
+                    <!-- right arrow  -->
+                    <div class="bg-gray-100 rounded-md p-1 ml-3 text-gray-400 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <!-- content heading end  -->
+            <!-- content start  -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7">
+                <!-- card item start  -->
+                <div class="flex flex-col space-y-3">
+                    <div class="rounded-lg">
+                        <img class="w-full" src="./assets/images/latest_news-1.png" alt="">
+                    </div>
+                    <div class="">
+                        <h2 class="font-bold text-lg capitalize tracking-wide">2021 Cadillac Escalade</h2>
+                        <p class="text-base text-gray-400 letter tracking-tight">The 2021 Escalade is a technological
+                            showcase and a worthy claimant of the flagship American luxury vehicle title.</p>
+                    </div>
+                    <div class="flex justify-between items-start py-6">
+                        <div class="flex items-center justify-center space-x-4">
+                            <img class="rounded-full h-42 w-42 flex items-center justify-center"
+                                src="./assets/images/avatar-1.png" alt="">
+                            <div class="flex flex-col items-start justify-center">
+                                <h4 class="text-base font-semibold capitalize">Hironaka Hiroe</h4>
+                                <p class="text-sm text-gray-500">Chief Editor</p>
+                            </div>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline text-red-400"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span class="font-bold">4.91</span> <span class="text-gray-500 text-base">(98)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+                <!-- card item start  -->
+                <div class="flex flex-col space-y-3">
+                    <div class="rounded-lg">
+                        <img class="w-full" src="./assets/images/latest_news-2.png" alt="">
+                    </div>
+                    <div class="">
+                        <h2 class="font-bold text-lg capitalize tracking-wide">2021 Cadillac Escalade</h2>
+                        <p class="text-base text-gray-400 letter tracking-tight">The 2021 Escalade is a technological
+                            showcase and a worthy claimant of the flagship American luxury vehicle title.</p>
+                    </div>
+                    <div class="flex justify-between items-start py-6">
+                        <div class="flex items-center justify-center space-x-4">
+                            <img class="rounded-full h-42 w-42 lg\:max-w-min flex items-center justify-center"
+                                src="./assets/images/avatar-2.png" alt="">
+                            <div class="flex flex-col items-start justify-center">
+                                <h4 class="text-base font-semibold capitalize">Hironaka Hiroe</h4>
+                                <p class="text-sm text-gray-500">Chief Editor</p>
+                            </div>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline text-red-400"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span class="font-bold">4.91</span> <span class="text-gray-500 text-base">(98)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+                <!-- card item start  -->
+                <div class="flex flex-col space-y-3">
+                    <div class="rounded-lg">
+                        <img class="w-full" src="./assets/images/latest_news-3.png" alt="">
+                    </div>
+                    <div class="">
+                        <h2 class="font-bold text-lg capitalize tracking-wide">2021 Cadillac Escalade</h2>
+                        <p class="text-base text-gray-400 letter tracking-tight">The 2021 Escalade is a technological
+                            showcase and a worthy claimant of the flagship American luxury vehicle title.</p>
+                    </div>
+                    <div class="flex justify-between items-start py-6">
+                        <div class="flex items-center justify-center space-x-4">
+                            <img class="rounded-full h-42 w-42 flex items-center justify-center"
+                                src="./assets/images/avatar-3.png" alt="">
+                            <div class="flex flex-col items-start justify-center">
+                                <h4 class="text-base font-semibold capitalize">Hironaka Hiroe</h4>
+                                <p class="text-sm text-gray-500">Chief Editor</p>
+                            </div>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline text-red-400"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span class="font-bold">4.91</span> <span class="text-gray-500 text-base">(98)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- card item end  -->
+
+            </div>
+            <!-- content end  -->
+        </div>
+    </section>
+    <!-- latest news end -->
+    <!-- footer start  -->
+    <footer class="bg-gray-100 mt-32">
+        <div
+            class="container grid grid-cols-2 lg:grid-cols-4 gap-y-8 justify-around pl-12 pr-7 py-14 font-inter text-sm text-gray-400">
+            <div class="flex flex-col space-y-2">
+                <h4 class="font-poppins font-semibold text-base text-black">About</h4>
+                <a href="#">How it works</a>
+                <a href="#">Careers</a>
+                <a href="#">About us</a>
+                <a href="#">Media</a>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <h4 class="font-poppins font-semibold text-base text-black">Community</h4>
+                <a href="#">Against Discrimination</a>
+                <a href="#">Invite friends</a>
+                <a href="#">Gift cards</a>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <h4 class="font-poppins font-semibold text-base text-black">Become seller</h4>
+                <a href="#">Add your vechicle</a>
+                <a href="#">Business account</a>
+                <a href="#">Resource center</a>
+                <a href="#">Community</a>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <h4 class="font-poppins font-semibold text-base text-black">Bookings support</h4>
+                <a href="#">Updates for COVID-19</a>
+                <a href="#">Help Center</a>
+                <a href="#">Support</a>
+                <a href="#">Trust & Safety</a>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end  -->
+    <!-- copyright section start -->
+    <section>
+        <div
+            class="container pt-4 pb-5 px-12 grid grid-cols-1 lg:grid-cols-2 items-center justify-between justify-items-center lg:justify-items-stretch gap-y-4 font-inter text-sm">
+            <div class="flex flex-col md:flex-row space-x-3 space-y-2 md:space-y-0 items-center">
+                <a href="#" class="font-bold capitalize">Privacy policy</a>
+                <a href="#" class="font-bold capitalize">Term of use</a>
+                <a href="#" class="text-gray-400">&copy; 2021 All rights reserved</a>
+            </div>
+            <div class="flex space-x-3 lg:justify-end">
+                <a href="#" class="font-bold capitalize">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    English
+                </a>
+                <a href="#" class="font-bold capitalize">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path
+                            d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                    </svg>
+                    USD
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- copyright section end -->
+
+    <!-- splide js  -->
+    <script src="./dist/splidejs/js/splide.min.js"></script>
+    <script>
+        document.getElementById('hambarg').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.add('active');
+        })
+
+        document.getElementById('sidebar-close').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.remove('active');
+        })
+
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#card-slider', {
+                perPage: 4,
+                perMove: 1,
+                arrows: true,
+                pagination: false,
+                padding: { left: 0, right: 0 },
+                breakpoints: {
+                    992: {
+                        perPage: 2,
+                    },
+                    767: {
+                        perPage: 1,
+                    },
+                },
+            }).mount();
+        });
+    </script>
+</body>
+
+</html>
