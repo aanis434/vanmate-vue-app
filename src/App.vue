@@ -1,6 +1,5 @@
 <template>
   <findVanByModel></findVanByModel>
-  <img src="./assets/images/van-1.png" alt="">
 </template>
 
 <script>
