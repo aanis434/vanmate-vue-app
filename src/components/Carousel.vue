@@ -1,6 +1,6 @@
 <template>
   <Splide :options="options">
-      <!-- custom arrow start -->
+    <!-- custom arrow start -->
     <div class="splide__arrows">
       <button class="splide__arrow splide__arrow--prev">
         <svg
@@ -55,4 +55,58 @@ export default {
 };
 </script>
 <style>
+.splide__arrow {
+  border-radius: none;
+  border-radius: 6px;
+  background-color: #e5e5e5;
+  opacity: 1;
+  /* color: #9A9EA7; */
+}
+
+.splide__arrow--next {
+  top: -65px;
+  right: 0;
+}
+
+.splide__arrow--prev {
+  top: -65px;
+  left: 94%;
+}
+
+.search-filter {
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1920px) {
+  .splide__arrow--prev {
+    top: -65px;
+    left: 95%;
+  }
+}
+@media (max-width: 1536px) {
+  .splide__arrow--prev {
+    top: -65px;
+    left: 94%;
+  }
+}
+@media (max-width: 1200px) {
+  .splide__arrow--prev {
+    top: -65px;
+    left: 92%;
+  }
+}
+@media (max-width: 991px) {
+  .splide__arrow--prev {
+    top: -65px;
+    left: 90%;
+  }
+}
+@media (max-width: 767px) {
+  .splide__arrow--prev {
+    top: -65px;
+    left: 82%;
+  }
+}
 </style>

@@ -4,7 +4,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
-      sm: [{'min': '100px', 'max': '767px'}],
+      sm: [{ 'min': '100px', 'max': '767px' }],
       md: '768px',
       lg: '992px',
       xl: '1200px',
@@ -29,7 +29,7 @@ module.exports = {
       backgroundImage: {
         'hero-pattern': "url('/assets/images/hero-bg.png')",
         'hero-pattern2': "url('/assets/images/hero-bg-2.png')",
-       }
+      }
     },
   },
   variants: {
